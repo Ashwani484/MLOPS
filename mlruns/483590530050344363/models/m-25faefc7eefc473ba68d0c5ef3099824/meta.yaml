@@ -1,0 +1,10 @@
+artifact_location: file:///D:/BITS%20Pilani/Sem-3/Mlops/Assignment/submission/mlruns/483590530050344363/models/m-25faefc7eefc473ba68d0c5ef3099824/artifacts
+creation_timestamp: 1754058837627
+experiment_id: '483590530050344363'
+last_updated_timestamp: 1754058843476
+model_id: m-25faefc7eefc473ba68d0c5ef3099824
+model_type: null
+name: scaler
+source_run_id: e73733c373244be6bc9933f4030ae010
+status: 2
+status_message: null

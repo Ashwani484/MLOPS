@@ -1,0 +1,14 @@
+artifact_uri: file:///D:/BITS%20Pilani/Sem-3/Mlops/Assignment/submission/mlruns/483590530050344363/bc8fbfdbd56d412eab6fec5b6072636b/artifacts
+end_time: 1754056539932
+entry_point_name: ''
+experiment_id: '483590530050344363'
+lifecycle_stage: active
+run_id: bc8fbfdbd56d412eab6fec5b6072636b
+run_name: Decision Tree
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1754056539815
+status: 3
+tags: []
+user_id: ashwa
