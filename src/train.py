@@ -1,4 +1,5 @@
 import pandas as pd
+from logger import logging
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -13,6 +14,7 @@ import joblib
 import os
 import shutil
 
+logging.info("Starting the Loading Iris dataset...")
 # --- (Data loading and model definitions are unchanged) ---
 iris = load_iris()
 X = pd.DataFrame(iris.data, columns=iris.feature_names)

@@ -1,4 +1,5 @@
 import pandas as pd
+from logger import logging
 from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
