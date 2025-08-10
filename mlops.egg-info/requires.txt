@@ -1,0 +1,14 @@
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+jupyter
+joblib
+fastapi
+uvicorn[standard]
+mlflow>=2.0
+scikit-learn
+pandas
+joblib
+python-dotenv

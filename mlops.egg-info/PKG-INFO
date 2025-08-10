@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: mlops
+Version: 1.0
+Author: Ashwani Kumar Shukla
+Author-email: aks@gmail.com
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: scikit-learn
+Requires-Dist: matplotlib
+Requires-Dist: seaborn
+Requires-Dist: jupyter
+Requires-Dist: joblib
+Requires-Dist: fastapi
+Requires-Dist: uvicorn[standard]
+Requires-Dist: mlflow>=2.0
+Requires-Dist: scikit-learn
+Requires-Dist: pandas
+Requires-Dist: joblib
+Requires-Dist: python-dotenv

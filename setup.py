@@ -21,7 +21,7 @@ setup(
     name='mlops',
     version='1.0',
     author='Ashwani Kumar Shukla',
-    author_email='ashwanishukla@gmail.com',
+    author_email='aks@gmail.com',
     packages=find_packages(),
     install_requires=get_requirements('requirements.txt')
 )
