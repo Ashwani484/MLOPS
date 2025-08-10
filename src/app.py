@@ -1,5 +1,5 @@
 import pandas as pd
-from logger import logging
+#from logger import logging
 from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
@@ -29,6 +29,7 @@ def read_root():
 
 @app.post("/predict", tags=["Prediction"])
 def predict_species(features: IrisFeatures):
+    #logging.info(f"Received prediction request: {features.dict()}")
     # Convert input data to a pandas DataFrame
     input_data = pd.DataFrame([features.dict()])
     

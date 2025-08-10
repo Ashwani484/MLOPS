@@ -1,0 +1,7 @@
+stages:
+  get_data:
+    cmd: python src/get_data.py
+    deps:
+      - src/get_data.py
+    outs:
+      - MLOPS Data

@@ -1,0 +1,38 @@
+# .github/workflows/ci.yml
+
+name: CI Pipeline - Lint and Test
+
+# This workflow runs on every push or pull request
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    # Step 1: Checks out your repository's code so the job can access it
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # Step 2: Sets up the specific version of Python you need
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.13'
+
+    # Step 3: Installs your project's dependencies from requirements.txt
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install flake8 pytest # Installs tools for linting and testing
+
+    # Step 4: Runs a linter (flake8) to check for code style issues and errors
+    - name: Lint with flake8
+      run: |
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+    # Step 5: Runs automated tests (you must create these in a /tests folder)
+    - name: Test with pytest
+      run: |
+        pytest

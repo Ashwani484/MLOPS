@@ -2,7 +2,7 @@ import pandas as pd
 from logger import logging
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler,LabelEncoder
 from sklearn.linear_model import LogisticRegression, LinearRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
@@ -13,22 +13,26 @@ import mlflow.sklearn
 import joblib
 import os
 import shutil
+from get_data import get_data
 
 logging.info("Starting the Loading Iris dataset...")
 # --- (Data loading and model definitions are unchanged) ---
-iris = load_iris()
-X = pd.DataFrame(iris.data, columns=iris.feature_names)
-y = iris.target
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+
+X,y=get_data()
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+logging.info("train-test split done.")
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
+logging.info("Data scaling done.")
 models = {
-    "Random Forest": RandomForestClassifier(random_state=42),
-    "Decision Tree": DecisionTreeClassifier(random_state=42)
+    "Logistic Regression": LogisticRegression(),
+    "Random Forest": RandomForestClassifier(random_state=42)
     
 }
 
+logging.info("MLflow setup Started...")
 # --- MLflow tracking for metrics only ---
 mlflow.set_experiment("Iris-Classifier-Training")
 
@@ -54,7 +58,10 @@ for model_name, model in models.items():
         print(f"F1 Score for {model_name}: {f1:.4f}")
         print(f"{model_name} Accuracy: {accuracy:.4f}")
         print(f"{model_name} r2_score: {r2:.4f} Mae:{mae:.4f}")
-        
+        logging.info(f"{model_name} Accuracy: {accuracy:.4f}")
+        logging.info(f"{model_name} r2_score: {r2:.4f} Mae:{mae:.4f}")
+        logging.info(f"Confusion Matrix for {model_name}:\n{confusion_matri}\n")
+        logging.info(f"Classification Report for {model_name}:\n{classification_report(y_test, y_pred)}\n")
         
         # Log params and metrics as before
         mlflow.log_params(model.get_params())
@@ -66,12 +73,25 @@ for model_name, model in models.items():
         mlflow.log_metric("precision",precision)
         mlflow.log_metric("recall", recall)
         mlflow.log_metric("f1_score", f1)
-        
+        logging.info(f"Model {model_name} logged to MLflow.")
         
         if accuracy > best_accuracy:
             best_accuracy = accuracy
             best_model = model
+            best_model_run_id = mlflow.active_run().info.run_id # Get the run ID
             print(f"New best model found: {model_name} with accuracy {accuracy:.4f}")
+            logging.info(f"New best model found: {model_name} with accuracy {accuracy:.4f}")
+
+
+
+# After the loop
+if best_model:
+    # Register the best model in the MLflow Model Registry
+    model_uri = f"runs:/{best_model_run_id}/model"
+    mlflow.register_model(model_uri=model_uri, name="Iris-Classifier-Best")
+    print("Best model has been registered in MLflow Model Registry.")
+
+
 
 # --- NEW: Save the best model and scaler locally ---
 output_dir = "saved_model"
@@ -83,5 +103,8 @@ if best_model:
     joblib.dump(best_model, os.path.join(output_dir, "model.joblib"))
     joblib.dump(scaler, os.path.join(output_dir, "scaler.joblib"))
     print(f"\nBest model and scaler saved to '{output_dir}/' directory.")
+    logging.info(f"Best model and scaler saved to '{output_dir}/' directory.")
 else:
     print("No model was trained successfully.")
+    logging.error("No model was trained successfully.")
+logging.info("MLflow setup completed.")
