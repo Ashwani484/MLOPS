@@ -18,14 +18,14 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.13'
+        python-version: '3.11'
 
     # Step 3: Installs your project's dependencies from requirements.txt
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install flake8 pytest # Installs tools for linting and testing
+        pip install flake8 pytest 
 
     # Step 4: Runs a linter (flake8) to check for code style issues and errors
     - name: Lint with flake8
