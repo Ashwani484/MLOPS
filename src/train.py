@@ -105,13 +105,10 @@ if best_model:
 
 # --- Saving the best model and scaler locally ---
 output_dir = "saved_model"
-if os.path.exists(output_dir):
-    shutil.rmtree(output_dir) # Clean up old model files
-os.makedirs(output_dir)
 
 if best_model:
-    joblib.dump(best_model, os.path.join(output_dir, "model.joblib"))
-    joblib.dump(scaler, os.path.join(output_dir, "scaler.joblib"))
+    joblib.dump(best_model, "saved_model/model.joblib")
+    joblib.dump(scaler, "saved_model/scaler.joblib")
     print(f"\nBest model and scaler saved to '{output_dir}/' directory.")
     logging.info(f"Best model and scaler saved to '{output_dir}/' directory.")
 else:
