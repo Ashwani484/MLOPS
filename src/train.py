@@ -13,6 +13,7 @@ from sklearn.metrics import confusion_matrix
 import mlflow
 import mlflow.sklearn
 import joblib
+import os
 import psutil as ps
 import shutil
 from get_data import get_data
@@ -31,19 +32,16 @@ logging.info("Data scaling done.")
 models = {
     "Logistic Regression": LogisticRegression(),
     "Random Forest": RandomForestClassifier(random_state=42)
+    
 }
 
 logging.info("MLflow setup Started...")
 
-# --- MLflow tracking configuration ---
-# **FIX: Explicitly set the tracking URI to a local relative path**
-# This ensures MLflow creates a './mlruns' directory in the current folder, which works on any OS.
-mlflow.set_tracking_uri("file:./mlruns")
+# --- MLflow tracking for metrics only ---
 mlflow.set_experiment("Iris-Classifier-Training")
 
 best_accuracy = 0.0
 best_model = None
-best_model_run_id = None
 
 # --- Training models, find the best one ---
 for model_name, model in models.items():
@@ -55,18 +53,22 @@ for model_name, model in models.items():
         recall = recall_score(y_test, y_pred, average='weighted')
         f1= f1_score(y_test, y_pred, average='weighted')
         confusion_matri = confusion_matrix(y_test, y_pred)
-        
         print(f"Confusion Matrix for {model_name}:\n{confusion_matri}\n")
         print(f"Classification Report for {model_name}:\n{classification_report(y_test, y_pred)}\n")
         print(f"Precision for {model_name}: {precision:.4f}")
         print(f"Recall for {model_name}: {recall:.4f}")
         print(f"F1 Score for {model_name}: {f1:.4f}")
         print(f"{model_name} Accuracy: {accuracy:.4f}")
-        
         logging.info(f"{model_name} Accuracy: {accuracy:.4f}")
+        logging.info(f"Confusion Matrix for {model_name}:\n{confusion_matri}\n")
         logging.info(f"Classification Report for {model_name}:\n{classification_report(y_test, y_pred)}\n")
+        logging.info(f"Precision for {model_name}: {precision:.4f}")
+        logging.info(f"Recall for {model_name}: {recall:.4f}")
+        logging.info(f"F1 Score for {model_name}: {f1:.4f}")
+        logging.info(f"Model {model_name} trained and evaluated successfully.")
         
-        # Log params and metrics
+        # Log params and metrics as before
+
         cpu = ps.cpu_percent()
         ram = ps.virtual_memory().percent
         mlflow.log_params(model.get_params())
@@ -78,7 +80,8 @@ for model_name, model in models.items():
         mlflow.log_metric("f1_score", f1)
         mlflow.log_metric("cpu_usage", cpu)
         mlflow.log_metric("ram_usage", ram)
-        
+        logging.info(f"Model{model_name} CPU usage: {cpu:.2f}%")
+        logging.info(f"Model{model_name} RAM usage: {ram:.2f} MB")
         logging.info(f"Model {model_name} logged to MLflow.")
         
         if accuracy > best_accuracy:
@@ -88,13 +91,17 @@ for model_name, model in models.items():
             print(f"New best model found: {model_name} with accuracy {accuracy:.4f}")
             logging.info(f"New best model found: {model_name} with accuracy {accuracy:.4f}")
 
+
+
 # finding the best model and registering it
-if best_model and best_model_run_id:
+if best_model:
     # Register the best model in the MLflow Model Registry
     model_uri = f"runs:/{best_model_run_id}/model"
     mlflow.register_model(model_uri=model_uri, name="Iris-Classifier-Best")
     print("Best model has been registered in MLflow Model Registry.")
     logging.info("Best model run id is: {}".format(best_model_run_id))
+
+
 
 # --- Saving the best model and scaler locally ---
 output_dir = "saved_model"
@@ -110,5 +117,4 @@ if best_model:
 else:
     print("No model was trained successfully.")
     logging.error("No model was trained successfully.")
-
 logging.info("MLflow setup completed.")
