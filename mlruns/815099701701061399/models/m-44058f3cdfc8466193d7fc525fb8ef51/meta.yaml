@@ -1,0 +1,10 @@
+artifact_location: file:///d:/BITS%20Pilani/Sem-3/Mlops/Assignment/submission/mlruns/815099701701061399/models/m-44058f3cdfc8466193d7fc525fb8ef51/artifacts
+creation_timestamp: 1754928654792
+experiment_id: '815099701701061399'
+last_updated_timestamp: 1754928665239
+model_id: m-44058f3cdfc8466193d7fc525fb8ef51
+model_type: null
+name: model
+source_run_id: d86a634a8c1f47619ffa8e8dc7e5a704
+status: 2
+status_message: null

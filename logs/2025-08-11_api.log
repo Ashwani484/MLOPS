@@ -1,0 +1,6 @@
+2025-08-11 17:09:58,220 - INFO - Prediction request received with data: {'sepal_length': 1.0, 'sepal_width': 1.0, 'petal_length': 1.0, 'petal_width': 1.0}
+2025-08-11 17:09:58,244 - INFO - Prediction successful. Output: {'predicted_species': 'setosa', 'predicted_label': 0, 'prediction_confidence': 0.9436993498083094}
+2025-08-11 17:10:04,221 - INFO - Prediction request received with data: {'sepal_length': 1.0, 'sepal_width': 1.0, 'petal_length': 1.0, 'petal_width': 1.0}
+2025-08-11 17:10:04,228 - INFO - Prediction successful. Output: {'predicted_species': 'setosa', 'predicted_label': 0, 'prediction_confidence': 0.9436993498083094}
+2025-08-11 17:26:04,503 - INFO - Prediction request received with data: {'sepal_length': 1.2, 'sepal_width': 2.5, 'petal_length': 5.8, 'petal_width': 1.5}
+2025-08-11 17:26:04,642 - INFO - Prediction successful. Output: {'predicted_species': 'setosa', 'predicted_label': 0, 'prediction_confidence': 0.7020043766817253}

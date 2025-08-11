@@ -1,0 +1,14 @@
+artifact_path: file:///d:/BITS%20Pilani/Sem-3/Mlops/Assignment/submission/mlruns/815099701701061399/models/m-87d5f7ba0e4f4baa88521b92624b966f/artifacts
+flavors:
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.6.1
+mlflow_version: 3.1.4
+model_id: m-87d5f7ba0e4f4baa88521b92624b966f
+model_size_bytes: 691
+model_uuid: m-87d5f7ba0e4f4baa88521b92624b966f
+prompts: null
+run_id: 560251ea878d461cb2c134bb7eb0c004
+utc_time_created: '2025-08-11 15:36:27.556113'

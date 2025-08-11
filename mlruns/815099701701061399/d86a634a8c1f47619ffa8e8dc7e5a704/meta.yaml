@@ -1,0 +1,14 @@
+artifact_uri: file:///d:/BITS%20Pilani/Sem-3/Mlops/Assignment/submission/mlruns/815099701701061399/d86a634a8c1f47619ffa8e8dc7e5a704/artifacts
+end_time: 1754928671876
+entry_point_name: ''
+experiment_id: '815099701701061399'
+lifecycle_stage: active
+run_id: d86a634a8c1f47619ffa8e8dc7e5a704
+run_name: Logistic Regression
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1754928654504
+status: 3
+tags: []
+user_id: ashwa
