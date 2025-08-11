@@ -19,8 +19,8 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ secrets.aks484 }}
+          password: ${{ secrets.dckr_pat_yfs0GUkGUR2KvZ9yc3lI0A50Sf4 }}
 
       # Step 3: Builds the Docker image from your dockerfile and pushes it to your Docker Hub repository
       - name: Build and push Docker image
