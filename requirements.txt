@@ -12,4 +12,5 @@ scikit-learn
 pandas
 joblib
 python-dotenv
+starlette-prometheus
 

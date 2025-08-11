@@ -2,7 +2,7 @@
 
 name: CD Pipeline - Build and Push Docker Image
 
-# This workflow runs only when code is pushed to the 'main' branch
+# This workflow runs only when code is pushed to the 'main/Master' branch
 on:
   push:
     branches: [ "master" ]
@@ -28,7 +28,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: aks484/iris-classifier:1.0 # IMPORTANT: Change this line!
+          tags: aks484/iris-classifier:1.0 # IMPORTANT: Change this line accoring your repo!
 
 
           

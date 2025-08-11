@@ -18,4 +18,4 @@ def test_read_root():
     assert response.status_code == 200
     
     # Assert that the response body is the expected JSON
-    assert response.json() == {"message": "Welcome to the Iris Classifier API. Go to /docs for documentation."}
+    assert response.json() == {"message": "Welcome to the Iris Classifier API. Go to /docs for documentation and for more details thanks..!!."}

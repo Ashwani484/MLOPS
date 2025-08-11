@@ -1,0 +1,14 @@
+artifact_uri: file:///d:/BITS%20Pilani/Sem-3/Mlops/Assignment/submission/mlruns/815099701701061399/2f470e4afec640f089311ae8480f10cb/artifacts
+end_time: 1754922111731
+entry_point_name: ''
+experiment_id: '815099701701061399'
+lifecycle_stage: active
+run_id: 2f470e4afec640f089311ae8480f10cb
+run_name: Random Forest
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1754922098642
+status: 3
+tags: []
+user_id: ashwa
